@@ -18,7 +18,7 @@ const apiClient = axios.create({
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   app.use(express.json());
 
@@ -37,7 +37,7 @@ async function startServer() {
   app.get("/api/search", async (req, res) => {
     const { q } = req.query;
     try {
-      const response = await apiClient.get(`https://api.deezer.com/search?q=${q}`);
+      const response = await apiClient.get(`https://api.deezer.com/search?q=${encodeURIComponent(String(q ?? ""))}`);
       res.json(response.data);
     } catch (error: any) {
       console.error("Search API Error:", error.message);
@@ -61,7 +61,7 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
   });
 }
 
