@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-green: #10b981; /* Emerald 500 */
+  --color-surface-black: #000000;
+  --color-surface-zinc-900: #18181b;
+  --color-surface-zinc-800: #27272a;
+  --color-surface-zinc-700: #3f3f46;
+  --color-text-zinc-400: #a1a1aa;
+  --color-text-zinc-500: #71717a;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-black text-white selection:bg-brand-green selection:text-black;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-700 rounded-full border-2 border-surface-black hover:bg-zinc-600;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .nav-item-active {
+    @apply text-white;
+  }
+  
+  .nav-item-hover {
+    @apply transition-all hover:text-white text-text-zinc-400 font-bold;
+  }
+
+  .main-gradient {
+    @apply bg-gradient-to-b from-surface-zinc-800 to-surface-zinc-900;
+  }
+
+  .stat-card {
+    @apply bg-surface-zinc-800/40 hover:bg-surface-zinc-700/60 transition-all rounded;
+  }
+
+  .standard-card {
+    @apply bg-surface-zinc-900/40 hover:bg-surface-zinc-800/80 transition-all rounded-lg;
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
